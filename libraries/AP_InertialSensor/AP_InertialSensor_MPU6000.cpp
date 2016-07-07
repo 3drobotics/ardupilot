@@ -10,7 +10,7 @@
 extern const AP_HAL::HAL& hal;
 
 // MPU6000 accelerometer scaling
-#define MPU6000_ACCEL_SCALE_1G    (GRAVITY_MSS / 4096.0f)
+#define MPU6000_ACCEL_SCALE_1G    (GRAVITY_MSS / 2048.0f)
 
 #if CONFIG_HAL_BOARD == HAL_BOARD_LINUX
 #include <AP_HAL_Linux/GPIO.h>
@@ -349,8 +349,8 @@ void AP_InertialSensor_MPU6000::start()
         // Rev C has different scaling than rev D
         _register_write(MPUREG_ACCEL_CONFIG,1<<3);
     } else {
-        // Accel scale 8g (4096 LSB/g)
-        _register_write(MPUREG_ACCEL_CONFIG,2<<3);
+        // Accel scale 16g (2048 LSB/g)
+        _register_write(MPUREG_ACCEL_CONFIG,3<<3);
     }
     hal.scheduler->delay(1);
 
