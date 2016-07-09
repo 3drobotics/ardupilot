@@ -232,21 +232,20 @@ bool NavEKF2_core::getPosNED(Vector3f &pos) const
                 Vector2f tempPosNE = location_diff(EKF_origin, gpsloc);
                 pos.x = tempPosNE.x;
                 pos.y = tempPosNE.y;
-                return false;
+                return true;
             } else {
                 // If no GPS fix is available, all we can do is provide the last known position
                 pos.x = outputDataNew.position.x;
                 pos.y = outputDataNew.position.y;
-                return false;
+                return true;
             }
         } else {
             // If the origin has not been set, then we have no means of providing a relative position
             pos.x = 0.0f;
             pos.y = 0.0f;
-            return false;
+            return true;
         }
     }
-    return false;
 }
 
 
